@@ -36,3 +36,7 @@ class BaseModel():
     def __str__(self):
         '''Return the string representation of the BaseModel instance'''
         return f'[{self.__class__.__name__} ({self.id} {self.__dict__})]'
+
+    def save(self):
+        '''Update datetime after change'''
+        self.updated_at = datetime.now()
