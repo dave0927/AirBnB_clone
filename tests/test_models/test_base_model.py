@@ -46,6 +46,11 @@ class TestBaseModelMethods(unittest.TestCase):
         self.assertEqual(Test_Base.updated_at.isoformat(),
                          kwargs['updated_at'])
 
+    def test_str_representation(self):
+        '''Test the format of the return value of the __str__ method'''
+        msg = f'[{type(self.base_1).__name__}] ({self.base_1.id}) {self.base_1.__dict__}'
+        self.assertEqual(str(self.base_1), msg)
+
 
 if __name__ == "__main__":
     unittest.main()
