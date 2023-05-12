@@ -27,5 +27,9 @@ class TestBaseModelMethods(unittest.TestCase):
         self.assertTrue(hasattr(self.base_1, 'to_dict'))
         self.assertTrue(hasattr(BaseModel, '__str__'))
 
+    def test_unique_IDs(self):
+        '''Test that two instances of BaseModel class are assigned different unique IDs'''
+        self.assertNotEqual(self.base_1.id, self.base_2.id)
+
 if __name__ == "__main__":
     unittest.main()
