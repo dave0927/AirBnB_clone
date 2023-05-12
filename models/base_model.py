@@ -2,7 +2,6 @@
 '''Define the BaseModel class'''
 
 import uuid
-import models
 from datetime import datetime
 
 
@@ -42,7 +41,13 @@ class BaseModel():
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        '''Return dic format of all attributes'''
+        '''Returns a dictionary containing all the relevant key/value pairs of
+           an instance, including:
+                - all key/value pairs from the __dict__ of the instance
+                    - the created_at and updated_at attributes in string format
+                      i.e (year-month-day T hour.minute.second.microsecond
+                - a key __class__ whose value is the class of the instance
+        '''
         new_dict = self.__dict__.copy()
         new_dict.update({'created_at': self.created_at.isoformat()})
         new_dict.update({'updated_at': self.updated_at.isoformat()})
