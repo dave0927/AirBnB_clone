@@ -4,6 +4,7 @@
 import unittest
 from models.base_model import BaseModel
 
+
 class TestBaseModelMethods(unittest.TestCase):
     '''Unittest test class for BaseModel class'''
 
@@ -30,6 +31,21 @@ class TestBaseModelMethods(unittest.TestCase):
     def test_unique_IDs(self):
         '''Test that two instances of BaseModel class are assigned different unique IDs'''
         self.assertNotEqual(self.base_1.id, self.base_2.id)
+
+    def test_kwargs_initialization(self):
+        '''Test the initialization of a class using kwargs'''
+        kwargs = {"__class__": "BaseModel",
+                  "created_at": "2023-05-12T11:38:40.285816",
+                  "updated_at": "2023-05-12T11:48:45.796947",
+                  "id": "10089d3e-2fd7-4573-b219-bf027207e22e"
+                  }
+        Test_Base = BaseModel(**kwargs)
+        self.assertEqual(Test_Base.id, kwargs['id'])
+        self.assertEqual(Test_Base.created_at.isoformat(),
+                         kwargs['created_at'])
+        self.assertEqual(Test_Base.updated_at.isoformat(),
+                         kwargs['updated_at'])
+
 
 if __name__ == "__main__":
     unittest.main()
