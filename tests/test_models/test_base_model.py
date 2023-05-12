@@ -2,8 +2,8 @@
 '''Contains unittests for the BaseModel class methods'''
 
 import os
+from time import sleep
 import unittest
-from datetime import datetime
 from models.base_model import BaseModel
 
 
@@ -80,6 +80,13 @@ class Test_BaseModel_Save(unittest.TestCase):
         del self.base_1
         del self.base_2
 
+    def test_updated_at_save(self):
+        '''Test if updated_at attribute is actually updated'''
+        time_1 = self.base_1.updated_at
+        sleep(.5)
+        self.base_1.save()
+        self.assertNotEqual(time_1, self.base_1.updated_at)
+        self.assertLess(time_1, self.base_1.updated_at)
 
 if __name__ == "__main__":
     unittest.main()
