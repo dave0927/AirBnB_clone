@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 '''Contains unittests for the BaseModel class methods'''
 
+import json
 import os
 from time import sleep
 import unittest
@@ -87,6 +88,19 @@ class Test_BaseModel_Save(unittest.TestCase):
         self.base_1.save()
         self.assertNotEqual(time_1, self.base_1.updated_at)
         self.assertLess(time_1, self.base_1.updated_at)
+
+    def test_object_saved(self):
+        '''Test if an object is stored in a file by save method'''
+        self.base_1.save()
+        try:
+            with open("file.json", mode='r', encoding='UTF-8') as f:
+                saved_data = json.load(f)
+
+            base_1_id = "BaseModel." + self.base_1.id
+            value = saved_data[base_1_id]
+            self.assertEqual(value, self.base_1.to_dict())
+        except FileNotFoundError:
+            pass
 
 if __name__ == "__main__":
     unittest.main()
