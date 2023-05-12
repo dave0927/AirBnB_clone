@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 '''Contains unittests for the BaseModel class methods'''
 
+import os
 import unittest
+from datetime import datetime
 from models.base_model import BaseModel
 
 
@@ -58,6 +60,17 @@ class TestBaseModelMethods(unittest.TestCase):
         test_dict['updated_at'] = self.base_1.updated_at.isoformat()
         test_dict['__class__'] = type(self.base_1).__name__
         self.assertEqual(self.base_1.to_dict(), test_dict)
+
+class Test_BaseModel_Save(unittest.TestCase):
+    '''For testing BaseModel's save method.'''
+
+    def setUp(self):
+        '''SetUp resources required to run the test'''
+        if os.path.isfile('file.json'):
+            os.rename("file.json", "tmp_file")
+        self.base_1 = BaseModel()
+        self.base_2 = BaseModel()
+
 
 if __name__ == "__main__":
     unittest.main()
