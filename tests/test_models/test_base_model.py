@@ -71,6 +71,15 @@ class Test_BaseModel_Save(unittest.TestCase):
         self.base_1 = BaseModel()
         self.base_2 = BaseModel()
 
+    def tearDown(self):
+        '''Tear down resources used to run tests'''
+        if os.path.isfile("file.json"):
+            os.remove("file.json")
+        if os.path.isfile("tmp_file"):
+            os.rename("tmp_file", "file.json")
+        del self.base_1
+        del self.base_2
+
 
 if __name__ == "__main__":
     unittest.main()
