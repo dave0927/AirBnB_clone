@@ -44,7 +44,7 @@ class BaseModel():
     def to_dict(self):
         '''Return dic format of all attributes'''
         new_dict = self.__dict__.copy()
-        new_dict.update({'created_at': self.created_at.isoformat})
-        new_dict.update({'updated_at': self.updated_at.isoformat})
+        new_dict.update({'created_at': self.created_at.isoformat()})
+        new_dict.update({'updated_at': self.updated_at.isoformat()})
         new_dict.update({'__class__': self.__class__.__name__})
-        return new_dict
+        return (new_dict)
