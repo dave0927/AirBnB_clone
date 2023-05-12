@@ -9,10 +9,14 @@ class BaseModel():
     '''The base for all other classes in AirBnB project'''
 
     def __init__(self, *args, **kwargs):
-        '''Init a new base
-            Args:
-                *args: unlimited number of args
-                **kwargs: dictionary based args
+        '''nitialize a new instance of the BaseModel class.
+           Also recreate a class instance from a dictiornary.
+        Attributes:
+            id (str) - a unique identification number for each class instance
+            created_at (datetime) - a datetime object indicating the date
+                                    and time the instance was created
+            updated_at (datetime) - a datetime object that is updated every
+                                    time the instance object is modified
         '''
 
         time_format = '%Y-%m-%dT%H:%M:%S.%f'
