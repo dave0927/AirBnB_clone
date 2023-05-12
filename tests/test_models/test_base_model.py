@@ -51,6 +51,13 @@ class TestBaseModelMethods(unittest.TestCase):
         msg = f'[{type(self.base_1).__name__}] ({self.base_1.id}) {self.base_1.__dict__}'
         self.assertEqual(str(self.base_1), msg)
 
+    def test_to_dict(self):
+        '''Test the return value of the to_dict() method'''
+        test_dict = {key: value for key, value in self.base_1.__dict__.items()}
+        test_dict['created_at'] = self.base_1.created_at.isoformat()
+        test_dict['updated_at'] = self.base_1.updated_at.isoformat()
+        test_dict['__class__'] = type(self.base_1).__name__
+        self.assertEqual(self.base_1.to_dict(), test_dict)
 
 if __name__ == "__main__":
     unittest.main()
