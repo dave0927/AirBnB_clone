@@ -12,5 +12,10 @@ class TestBaseModelMethods(unittest.TestCase):
         self.base_1 = BaseModel()
         self.base_2 = BaseModel()
 
+    def tearDown(self):
+        '''Tear down the resources that had been setup to run tests'''
+        del self.base_1
+        del self.base_2
+
 if __name__ == "__main__":
     unittest.main()
