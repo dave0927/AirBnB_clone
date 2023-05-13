@@ -2,9 +2,6 @@
 '''The entry point of the command interpreter.'''
 
 import cmd
-import models
-from models.base_model import BaseMode
-
 
 class HBNBCommand(cmd.Cmd):
     '''HBNBCommand implements the Cmd class.
@@ -14,3 +11,19 @@ class HBNBCommand(cmd.Cmd):
             prompt (str): The command prompt.
     '''
     prompt = '(hbnb) '
+
+    def do_quit(self, line):
+        '''Quit command to exit the program.'''
+        return True
+
+    def do_EOF(self, line):
+        '''EOF signal to exit the program.'''
+        return True
+
+    def emptyline(self):
+        '''Do nothing when receiving an empty line.'''
+        pass
+
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
