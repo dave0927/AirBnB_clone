@@ -33,8 +33,11 @@ class FileStorage:
         '''Serialize __objects to the JSON file __file_path.'''
         odict = FileStorage.__objects
         objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
-        with open(FileStorage.__file_path, "w") as f:
-            json.dump(objdict, f)
+        try:
+            with open(FileStorage.__file_path, "w") as f:
+                json.dump(objdict, f)
+        except Exception as e:
+            print('Error while writting to file: ', e)
 
     def reload(self):
         '''Deserialize the JSON file __file_path to __objects, if it exists.'''
