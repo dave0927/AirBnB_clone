@@ -53,22 +53,7 @@ class HBNBCommand(cmd.Cmd):
             on the class name and id.
             Usage: show <ClassName> <id>
         '''
-
-        cmds = line.split()
-
-        if len(cmds) == 0:
-            print("** class name missing **")
-            return
-        try:
-            eval(cmds[0])
-        except NameError:
-            print("** class doesn't exist **")
-            return
-
-        if len(cmds) == 1:
-            print("** instance id missing **")
-            return
-
+        cmds = parsCmd(line)
         models.storage.reload()
         objects = models.storage.all()
 
@@ -82,22 +67,7 @@ class HBNBCommand(cmd.Cmd):
             Change is saved.
             Usage: destroy <ClassName> <id>
         '''
-        cmds = line.split()
-
-        if len(cmds) == 0:
-            print("** class name missing **")
-            return
-
-        try:
-            eval(cmds[0])
-        except NameError:
-            print("** class doesn't exist **")
-            return
-
-        if len(cmds) == 1:
-            print("** instance id missing **")
-            return
-
+        cmds = parsCmd(line)
         models.storage.reload()
         obj = models.storage.all()
 
@@ -108,6 +78,26 @@ class HBNBCommand(cmd.Cmd):
             return
 
         models.storage.save()
+
+
+def parsCmd(command):
+    splited_cmds = command.split()
+
+    if len(splited_cmds) == 0:
+        print("** class name missing **")
+        return
+
+    try:
+        eval(splited_cmds[0])
+    except NameError:
+        print("** class doesn't exist **")
+        return
+
+    if len(splited_cmds) == 1:
+        print("** instance id missing **")
+        return
+    else:
+        return (splited_cmds)
 
 
 if __name__ == '__main__':
