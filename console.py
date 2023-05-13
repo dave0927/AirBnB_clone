@@ -77,6 +77,38 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
+    def do_destroy(self, line):
+        ''' Deletes an instance based on the class name and id.
+            Change is saved.
+            Usage: destroy <ClassName> <id>
+        '''
+        cmds = line.split()
+
+        if len(cmds) == 0:
+            print("** class name missing **")
+            return
+
+        try:
+            eval(cmds[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+
+        if len(cmds) == 1:
+            print("** instance id missing **")
+            return
+
+        models.storage.reload()
+        obj = models.storage.all()
+
+        try:
+            del obj[cmds[0] + "." + cmds[1]]
+        except KeyError:
+            print("** no instance found **")
+            return
+
+        models.storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
