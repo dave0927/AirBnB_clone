@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 '''The entry point of the command interpreter.'''
 
+import re
 import cmd
 import models
+from models import storage
 from models.base_model import BaseModel
 
 
@@ -105,6 +107,51 @@ class HBNBCommand(cmd.Cmd):
                 obj_list.append(val)
 
         print(obj_list)
+
+    def do_update(self, line):
+        '''
+            Update a class instance of a given id by adding or updating
+            a given attribute key/value pair or dictionary.
+
+            Usage:  update <class> <id> <attribute_name> <attribute_value> or
+                    <class>.update(<id>, <attribute_name>, <attribute_value>) or
+                    <class>.update(<id>, <dictionary>)
+        '''
+        dq1 = line.find('"')
+        if dq1 != -1:
+            dq2 = line[dq1+1:].find('"')
+            if dq2 != -1:
+                dq2 = dq1 + dq2 + 1
+
+        cmds = parsCmd(line)
+
+        models.storage.reload()
+        objs = models.storage.all()
+
+        try:
+            value = objs[cmds[0] + "." + cmds[1]]
+        except KeyError:
+            print("** no instance found **")
+            return
+        if len(cmds) == 2:
+            print("** attribute name missing **")
+            return
+        elif len(cmds) == 3:
+            print("** value missing **")
+            return
+
+        try:
+            if dq1 != -1:
+                if dq2 != -1:
+                    cmds[3] = line[dq1+1:dq2]
+            attr_type = type(getattr(value, cmds[2]))
+            cmds[3] = attr_type(cmds[3])
+
+        except AttributeError:
+            pass
+
+        setattr(value, cmds[2], cmds[3])
+        models.storage.save()
 
 
 def parsCmd(command):
