@@ -79,6 +79,33 @@ class HBNBCommand(cmd.Cmd):
 
         models.storage.save()
 
+    def do_all(self, line):
+        ''' Display string representations of all instances of a given class.
+            If no class is specified, displays all instantiated objects.
+            Usage: all <ClassName> or all
+        '''
+        obj_list = []
+        models.storage.reload()
+        objs = models.storage.all()
+
+        if line:
+            try:
+                eval(line)
+            except NameError:
+                print("** class doesn't exist **")
+        else:
+            line.strip()
+
+        for key, val in objs.items():
+            if line and isinstance(val, eval(line)):
+                val = str(val)
+                obj_list.append(val)
+            elif not line:
+                val = str(val)
+                obj_list.append(val)
+
+        print(obj_list)
+
 
 def parsCmd(command):
     splited_cmds = command.split()
