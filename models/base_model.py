@@ -10,7 +10,7 @@ class BaseModel():
     '''The base for all other classes in AirBnB project'''
 
     def __init__(self, *args, **kwargs):
-        '''nitialize a new instance of the BaseModel class.
+        '''Initializes a new instance of the BaseModel class.
            Also recreate a class instance from a dictiornary.
         Attributes:
             id (str) - a unique identification number for each class instance
@@ -39,7 +39,8 @@ class BaseModel():
 
     def __str__(self):
         '''Return the string representation of the BaseModel instance'''
-        return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
+        clsname = self.__class__.__name__
+        return ("[{}] ({}) {}".format(clsname, self.id, self.__dict__))
 
     def save(self):
         '''Update datetime after change'''
