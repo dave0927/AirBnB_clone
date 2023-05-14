@@ -62,6 +62,7 @@ class TestBaseModelMethods(unittest.TestCase):
         test_dict['__class__'] = type(self.base_1).__name__
         self.assertEqual(self.base_1.to_dict(), test_dict)
 
+
 class Test_BaseModel_Save(unittest.TestCase):
     '''For testing BaseModel's save method.'''
 
@@ -101,6 +102,7 @@ class Test_BaseModel_Save(unittest.TestCase):
             self.assertEqual(value, self.base_1.to_dict())
         except FileNotFoundError:
             pass
+
 
 if __name__ == "__main__":
     unittest.main()
