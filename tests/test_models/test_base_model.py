@@ -52,8 +52,8 @@ class TestBaseModelMethods(unittest.TestCase):
 
     def test_str_representation(self):
         '''Test the format of the return value of the __str__ method'''
-        msg = f'[{type(self.base_1).__name__}] ({self.base_1.id})\
-                {self.base_1.__dict__}'
+        cname = type(self.base_1).__name__
+        msg = f'[{cname}] ({self.base_1.id}) {self.base_1.__dict__}'
         self.assertEqual(str(self.base_1), msg)
 
     def test_to_dict(self):
