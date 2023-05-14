@@ -10,6 +10,9 @@ from models.state import State
 from models.review import Review
 from models.amenity import Amenity
 
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
+
 
 class FileStorage:
     '''Definition of class FileStorage that handles serialization of instances
@@ -34,7 +37,7 @@ class FileStorage:
             obj (object): object to be set in the __objects dictionary
         '''
         ocname = obj.__class__.__name__
-        FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
+        FileStorage.__objects[f"{ocname}.{obj.id}"] = obj
 
     def save(self):
         '''Serialize __objects to the JSON file __file_path.'''
@@ -47,13 +50,14 @@ class FileStorage:
             print('Error while writting to file: ', e)
 
     def reload(self):
-        '''Deserialize the JSON file __file_path to __objects, if it exists.'''
+        """
+        Deserializes the JSON file to __objects
+        -> Only IF it exists!
+        """
         try:
-            with open(FileStorage.__file_path) as f:
-                objdict = json.load(f)
-                for o in objdict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(cls_name)(**o))
-        except FileNotFoundError:
-            return
+            with open(self.__file_path, 'r') as f:
+                jo = json.load(f)
+            for key in jo:
+                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
+        except:
+            pass
