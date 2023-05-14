@@ -21,9 +21,7 @@ class BaseModel():
         '''
 
         time_format = '%Y-%m-%dT%H:%M:%S.%f'
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
@@ -34,6 +32,9 @@ class BaseModel():
                 else:
                     setattr(self, key, value)
         else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
 
     def __str__(self):
@@ -54,7 +55,7 @@ class BaseModel():
                 - a key __class__ whose value is the class of the instance
         '''
         new_dict = self.__dict__.copy()
-        new_dict.update({'created_at': self.created_at.isoformat()})
-        new_dict.update({'updated_at': self.updated_at.isoformat()})
-        new_dict.update({'__class__': self.__class__.__name__})
+        new_dict['created_at'] = self.created_at.isoformat()
+        new_dict['updated_at'] = self.updated_at.isoformat()
+        new_dict['__class__'] = self.__class__.__name__
         return (new_dict)
