@@ -153,15 +153,9 @@ class HBNBCommand(cmd.Cmd):
         Update a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary.
 
-<<<<<<< HEAD
-            Usage:  update <class> <id> <attribute_name> <attribute_value> or
-                    <class>.update(<id>, <attribute_name>, <attribute_value>)
-                    or <class>.update(<id>, <dictionary>)
-=======
         Usage:  update <class> <id> <attribute_name> <attribute_value> or
                 <class>.update(<id>, <attribute_name>, <attribute_value>) or
                 <class>.update(<id>, <dictionary>)
->>>>>>> f8bd0d0539c2d35005080b406c3debb42392f649
         '''
         dq1 = line.find('"')
         if dq1 != -1:
