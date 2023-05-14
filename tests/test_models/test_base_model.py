@@ -32,7 +32,8 @@ class TestBaseModelMethods(unittest.TestCase):
         self.assertTrue(hasattr(BaseModel, '__str__'))
 
     def test_unique_IDs(self):
-        '''Test that two instances of BaseModel class are assigned different unique IDs'''
+        '''Test that two instances of BaseModel class are assigned\
+                 different unique IDs'''
         self.assertNotEqual(self.base_1.id, self.base_2.id)
 
     def test_kwargs_initialization(self):
@@ -51,7 +52,8 @@ class TestBaseModelMethods(unittest.TestCase):
 
     def test_str_representation(self):
         '''Test the format of the return value of the __str__ method'''
-        msg = f'[{type(self.base_1).__name__}] ({self.base_1.id}) {self.base_1.__dict__}'
+        msg = f'[{type(self.base_1).__name__}] ({self.base_1.id})\
+                {self.base_1.__dict__}'
         self.assertEqual(str(self.base_1), msg)
 
     def test_to_dict(self):
