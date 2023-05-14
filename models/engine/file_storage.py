@@ -3,6 +3,8 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User
+
 
 class FileStorage:
     '''Definition of class FileStorage that handles serialization of instances
@@ -18,7 +20,7 @@ class FileStorage:
     def all(self):
         '''Return the dictionary __objects.'''
         return FileStorage.__objects
-    
+
     def new(self, obj):
         '''Sets a new instance in the '__objects' dictionary using
            <obj class name>.id as the key
@@ -50,3 +52,4 @@ class FileStorage:
                     self.new(eval(cls_name)(**o))
         except FileNotFoundError:
             return
+
