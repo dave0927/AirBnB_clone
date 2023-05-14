@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Contains the definition of the class User that inherits from BaseModel.'''
+""" Defines the User class that inherits from BaseModel"""
 from models.base_model import BaseModel
 
 

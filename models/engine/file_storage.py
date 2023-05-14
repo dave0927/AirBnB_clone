@@ -4,6 +4,11 @@
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.city import City
+from models.state import State
+from models.review import Review
+from models.amenity import Amenity
 
 class FileStorage:
     '''Definition of class FileStorage that handles serialization of instances
@@ -19,7 +24,7 @@ class FileStorage:
     def all(self):
         '''Return the dictionary __objects.'''
         return FileStorage.__objects
-    
+
     def new(self, obj):
         '''Sets a new instance in the '__objects' dictionary using
            <obj class name>.id as the key
