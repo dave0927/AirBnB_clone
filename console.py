@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
             prompt (str): The command prompt.
     '''
     prompt = '(hbnb) '
-    
+
     def default(self, line):
         '''Catch commands if nothing else matches then.'''
         self._precmd(line)
@@ -150,12 +150,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         '''
-            Update a class instance of a given id by adding or updating
-            a given attribute key/value pair or dictionary.
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary.
 
-            Usage:  update <class> <id> <attribute_name> <attribute_value> or
-                    <class>.update(<id>, <attribute_name>, <attribute_value>) or
-                    <class>.update(<id>, <dictionary>)
+        Usage:  update <class> <id> <attribute_name> <attribute_value> or
+                <class>.update(<id>, <attribute_name>, <attribute_value>) or
+                <class>.update(<id>, <dictionary>)
         '''
         dq1 = line.find('"')
         if dq1 != -1:
