@@ -10,6 +10,7 @@ from models.state import State
 from models.review import Review
 from models.amenity import Amenity
 
+
 class FileStorage:
     '''Definition of class FileStorage that handles serialization of instances
        to JSON file and deserialization of JSON files to instances
