@@ -22,7 +22,7 @@ class BaseModel():
 
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
 
-        self.id = str(uuid.uuid4())
+        self.user_id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         if len(kwargs) != 0:
@@ -39,7 +39,7 @@ class BaseModel():
     def __str__(self):
         '''Return the string representation of the BaseModel instance'''
         cls_name = self.__class__.__name__
-        return f"[{cls_name}] ({self.id}) {self.__dict__}"
+        return f"[{cls_name}] ({self.user_id}) {self.__dict__}"
 
     def save(self):
         '''Update datetime after change'''
