@@ -2,14 +2,14 @@
 '''Define the BaseModel class'''
 
 import uuid
-import models
 from datetime import datetime
+import models
 
 
 class BaseModel():
     '''The base for all other classes in AirBnB project'''
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         '''nitialize a new instance of the BaseModel class.
            Also recreate a class instance from a dictiornary.
         Attributes:
@@ -28,8 +28,8 @@ class BaseModel():
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == '__class__':
-                    continue
-                elif key == "created_at" or key == "updated_at":
+                    pass
+                elif key in ["created_at", "updated_at"]:
                     self.__dict__[key] = datetime.strptime(value, time_format)
                 else:
                     self.__dict__[key] = value
@@ -39,7 +39,7 @@ class BaseModel():
     def __str__(self):
         '''Return the string representation of the BaseModel instance'''
         cls_name = self.__class__.__name__
-        return "[{}] ({}) {}".format(cls_name, self.id, self.__dict__)
+        return f"[{cls_name}] ({self.id}) {self.__dict__}"
 
     def save(self):
         '''Update datetime after change'''
@@ -58,4 +58,4 @@ class BaseModel():
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
         new_dict["__class__"] = self.__class__.__name__
-        return (new_dict)
+        return new_dict
